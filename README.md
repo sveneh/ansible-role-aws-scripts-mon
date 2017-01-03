@@ -5,6 +5,12 @@ An Ansible role for installing and configuring the Amazon CloudWatch Monitoring 
 
 Followed instructions from [Monitoring Memory and Disk Metrics for Amazon EC2 Linux Instances](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/mon-scripts.html).
 
+Fork
+----
+
+This is a fork to allow a custom AWS monitoring scripts to be deployed. I modified it to add ECS Docker utilization reporting https://github.com/sveneh/aws-scripts-mon
+
+
 Requirements
 ------------
 

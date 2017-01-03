@@ -1,4 +1,6 @@
 ---
+aws_scripts_mon_version: 1.2.1
+aws_scripts_mon_downloadurl: "http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-{{ aws_scripts_mon_version }}.zip"
 aws_scripts_mon_base_directory: /opt
 aws_scripts_mon_cron_user: "{{ ansible_user }}"
 aws_scripts_mon_options: "--disk-space-util --disk-path=/"

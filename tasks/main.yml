@@ -9,12 +9,23 @@
 - include: redhat.yml
   when: ansible_os_family == 'RedHat'
 
+# TODO: temp hack, until we have the custom setup everywhere
+- name: remove old installation
+  file: path={{ aws_scripts_mon_base_directory }}/aws-scripts-mon
+        state=absent
+
 - name: Download and install the monitoring scripts
-  unarchive: src=http://aws-cloudwatch.s3.amazonaws.com/downloads/CloudWatchMonitoringScripts-{{ aws_scripts_mon_version }}.zip
+  unarchive: src={{ aws_scripts_mon_downloadurl }}
              dest={{ aws_scripts_mon_base_directory }}
              owner={{ aws_scripts_mon_cron_user }}
              creates={{ aws_scripts_mon_base_directory }}/aws-scripts-mon/mon-put-instance-data.pl
              copy=no
+
+- name: Link project folder, in case it was not the original source
+  file:
+    src: "{{ aws_scripts_mon_base_directory }}/aws-scripts-mon-{{ aws_scripts_mon_version }}"
+    dest: "{{ aws_scripts_mon_base_directory }}/aws-scripts-mon"
+    state: link
 
 - name: Configure the credentials for the script
   template: src=awscreds.conf.j2
